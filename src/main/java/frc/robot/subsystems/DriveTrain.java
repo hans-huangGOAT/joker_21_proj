@@ -54,6 +54,13 @@ public class DriveTrain extends SubsystemBase {
     return gyro.getAngle(); 
   }
 
+  /*
+    reset the angle of gyro
+  */
+  public void resetGyro(){
+    gyro.reset();
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
