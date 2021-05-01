@@ -35,6 +35,7 @@ public class SuckerOut extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    intake_subsys.sucker_stop();
   }
 
   // Returns true when the command should end.

@@ -24,6 +24,10 @@ public final class Constants {
         public static final int RIGHT_MOTOR_PORT2 = 4;
         public static final int RIGHT_MOTOR_PORT3 = 5;
 
+        public static final double HIGH_SPEED_DRIVETRAIN = 1;
+        public static final double MIDDLE_SPEED_DRIVETRAIN = 0.75;
+        public static final double LOW_SPEED_DRIVETRAIN = 0.5;
+
     }
 
     // Unchanged Constants for Joystick Controlling
@@ -37,14 +41,17 @@ public final class Constants {
         }
 
         public static final class AssistStick {
-
+            public static final int SUCKER_IN_BUTTON = 3;
+            public static final int SUCKER_OUT_BUTTON = 5;
+            public static final int SUCKER_OFF_BUTTON = 4;
         }
     }
 
     // Unchanged Constants for Intake
     public static final class IntakeConst {
         public static final int SUCKER_MOTOR_PORT = 9;
-        public static final double SUCKING_SPEED = 0.75;
+        public static final double SUCKER_IN_SPEED = 1;
+        public static final double SUCKER_OUT_SPEED = 0.75;
         public static final int EXPAN_SOLEN_PORT = 1;
         public static final boolean EXPAN_SOLEN_PUSH_OUT_MODE = true;
         public static final boolean EXPAN_SOLEN_TAKE_BACK_MODE = false;
