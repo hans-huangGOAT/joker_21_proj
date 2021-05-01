@@ -48,6 +48,7 @@ public final class Constants {
         public static final int EXPAN_SOLEN_PORT = 1;
         public static final boolean EXPAN_SOLEN_PUSH_OUT_MODE = true;
         public static final boolean EXPAN_SOLEN_TAKE_BACK_MODE = false;
+        public static final int SUCKING_DIRECTION_SIGN = 1;
     }
 
 }
