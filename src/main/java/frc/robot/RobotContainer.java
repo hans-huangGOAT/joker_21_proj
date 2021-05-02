@@ -36,20 +36,23 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // Joysticks and joystick buttons are defined here...
-  Joystick main_stick = new Joystick(JoystickConst.MAIN_STICK_PORT);
-  JoystickButton high_speed_drivetrain_btn = new JoystickButton(main_stick,
+  private final Joystick main_stick = new Joystick(JoystickConst.MAIN_STICK_PORT);
+  private final JoystickButton high_speed_drivetrain_btn = new JoystickButton(main_stick,
       JoystickConst.MainStick.HIGH_SPEED_DRIVETRAIN_BUTTON);
-  JoystickButton mid_speed_drivetrain_btn = new JoystickButton(main_stick,
+  private final JoystickButton mid_speed_drivetrain_btn = new JoystickButton(main_stick,
       JoystickConst.MainStick.MID_SPEED_DRIVETRAIN_BUTTON);
-  JoystickButton low_speed_drivetrain_btn = new JoystickButton(main_stick,
+  private final JoystickButton low_speed_drivetrain_btn = new JoystickButton(main_stick,
       JoystickConst.MainStick.LOW_SPEED_DRIVETRAIN_BUTTON);
-  Joystick assist_stick = new Joystick(JoystickConst.ASSIST_STICK_PORT);
-  JoystickButton sucker_in_btn = new JoystickButton(assist_stick, JoystickConst.AssistStick.SUCKER_IN_BUTTON);
-  JoystickButton sucker_out_btn = new JoystickButton(assist_stick, JoystickConst.AssistStick.SUCKER_OUT_BUTTON);
-  JoystickButton sucker_off_btn = new JoystickButton(assist_stick, JoystickConst.AssistStick.SUCKER_OFF_BUTTON);
-  JoystickButton push_out_intake_btn = new JoystickButton(assist_stick,
+  private final Joystick assist_stick = new Joystick(JoystickConst.ASSIST_STICK_PORT);
+  private final JoystickButton sucker_in_btn = new JoystickButton(assist_stick,
+      JoystickConst.AssistStick.SUCKER_IN_BUTTON);
+  private final JoystickButton sucker_out_btn = new JoystickButton(assist_stick,
+      JoystickConst.AssistStick.SUCKER_OUT_BUTTON);
+  private final JoystickButton sucker_off_btn = new JoystickButton(assist_stick,
+      JoystickConst.AssistStick.SUCKER_OFF_BUTTON);
+  private final JoystickButton push_out_intake_btn = new JoystickButton(assist_stick,
       JoystickConst.AssistStick.PUSH_OUT_INTAKE_BUTTON);
-  JoystickButton take_back_intake_btn = new JoystickButton(assist_stick,
+  private final JoystickButton take_back_intake_btn = new JoystickButton(assist_stick,
       JoystickConst.AssistStick.TAKE_BACK_INTAKE_BUTTON);
 
   // The robot's subsystems are defined here...
