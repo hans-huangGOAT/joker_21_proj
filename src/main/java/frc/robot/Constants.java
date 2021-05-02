@@ -49,6 +49,7 @@ public final class Constants {
             public static final int SUCKER_OFF_BUTTON = 4;
             public static final int PUSH_OUT_INTAKE_BUTTON = 7;
             public static final int TAKE_BACK_INTAKE_BUTTON = 8;
+            public static final int PRE_SHOOTING_AXIS = 1;
         }
     }
 
@@ -68,6 +69,7 @@ public final class Constants {
         public static final int ROUTER_MOTOR_PORT2 = 20;
         public static final int PRE_SHOOTING_MOTOR_PORT1 = 6;
         public static final int PRE_SHOOTING_MOTOR_PORT2 = 8;
+        public static final double PRE_SHOOTING_MAX_SPEED = 0.6;
     }
 
 }

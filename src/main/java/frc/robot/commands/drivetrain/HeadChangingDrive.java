@@ -34,7 +34,6 @@ public class HeadChangingDrive extends CommandBase {
   @Override
   public void execute() {
     angle = drivetrain.getGyroAngle();
-    System.out.println(angle);
     if ((angle > 90 && angle < 270) || (angle > -270 && angle < -90)) {
       drivetrain.tankDrive(right_speed.getAsDouble(), left_speed.getAsDouble());
     }

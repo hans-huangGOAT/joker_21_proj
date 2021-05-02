@@ -23,8 +23,8 @@ public class Loading extends SubsystemBase {
     router_left = new WPI_VictorSPX(LoadingConst.ROUTER_MOTOR_PORT1);
     router_right = new WPI_VictorSPX(LoadingConst.ROUTER_MOTOR_PORT2);
     router = new SpeedControllerGroup(router_left, router_right);
-    pre_shooting1 = new WPI_VictorSPX(LoadingConst.ROUTER_MOTOR_PORT1);
-    pre_shooting2 = new WPI_VictorSPX(LoadingConst.ROUTER_MOTOR_PORT2);
+    pre_shooting1 = new WPI_VictorSPX(LoadingConst.PRE_SHOOTING_MOTOR_PORT1);
+    pre_shooting2 = new WPI_VictorSPX(LoadingConst.PRE_SHOOTING_MOTOR_PORT2);
     pre_shooting = new SpeedControllerGroup(pre_shooting1, pre_shooting2);
   }
 
@@ -51,12 +51,8 @@ public class Loading extends SubsystemBase {
     router.set(-router_speed);
   }
 
-  public void pre_shooting_up(double pre_shooting_speed) {
+  public void loadPreShooting(double pre_shooting_speed) {
     pre_shooting.set(pre_shooting_speed);
-  }
-
-  public void pre_shooting_down(double pre_shooting_speed) {
-    pre_shooting.set(-pre_shooting_speed);
   }
 
 }

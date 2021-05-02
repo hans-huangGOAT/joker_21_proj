@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Constants.IntakeConst;
 import frc.robot.Constants.JoystickConst;
+import frc.robot.Constants.LoadingConst;
+import frc.robot.Constants.JoystickConst.AssistStick;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.drivetrain.HeadChangingDrive;
 import frc.robot.commands.intake.PushOutIntake;
@@ -15,9 +17,11 @@ import frc.robot.commands.intake.SuckerIn;
 import frc.robot.commands.intake.SuckerOut;
 import frc.robot.commands.intake.SuckerStop;
 import frc.robot.commands.intake.TakeBackIntake;
+import frc.robot.commands.loading.LoadPreShooting;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Loading;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -45,6 +49,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DriveTrain drivetrain = new DriveTrain();
   private final Intake intake_subsys = new Intake();
+  private final Loading loading_subsys = new Loading();
 
   // The robot's commands are defined here...
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
@@ -79,6 +84,9 @@ public class RobotContainer {
         new HeadChangingDrive(drivetrain,
             () -> 0.5 * main_stick.getRawAxis(JoystickConst.MainStick.LEFT_DRIVETRAIN_AXIS),
             () -> 0.5 * main_stick.getRawAxis(JoystickConst.MainStick.RIGHT_DRIVETRAIN_AXIS)));
+    CommandScheduler.getInstance().setDefaultCommand(loading_subsys,
+        new LoadPreShooting(loading_subsys, () -> LoadingConst.PRE_SHOOTING_MAX_SPEED
+            * assist_stick.getRawAxis(JoystickConst.AssistStick.PRE_SHOOTING_AXIS)));
   }
 
   /**
