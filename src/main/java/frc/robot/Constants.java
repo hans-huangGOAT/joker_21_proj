@@ -25,7 +25,7 @@ public final class Constants {
         public static final int RIGHT_MOTOR_PORT3 = 5;
 
         public static final double HIGH_SPEED_DRIVETRAIN = 1;
-        public static final double MIDDLE_SPEED_DRIVETRAIN = 0.75;
+        public static final double MID_SPEED_DRIVETRAIN = 0.75;
         public static final double LOW_SPEED_DRIVETRAIN = 0.5;
 
     }
@@ -70,6 +70,13 @@ public final class Constants {
         public static final int PRE_SHOOTING_MOTOR_PORT1 = 6;
         public static final int PRE_SHOOTING_MOTOR_PORT2 = 8;
         public static final double PRE_SHOOTING_MAX_SPEED = 0.6;
+    }
+
+    // Unchanged Constants for Shooter
+    public static final class ShooterConst {
+        public static final int SHOOTER_MOTOR_PORT1 = 11;
+        public static final int SHOOTER_MOTOR_PORT2 = 12;
+        public static final int ADJUSTER_LR_MOTOR_PORT = 10;
     }
 
 }

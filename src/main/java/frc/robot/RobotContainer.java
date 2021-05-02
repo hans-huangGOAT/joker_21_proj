@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.Constants.DriveTrainConst;
 import frc.robot.Constants.IntakeConst;
 import frc.robot.Constants.JoystickConst;
 import frc.robot.Constants.LoadingConst;
@@ -36,6 +37,12 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // Joysticks and joystick buttons are defined here...
   Joystick main_stick = new Joystick(JoystickConst.MAIN_STICK_PORT);
+  JoystickButton high_speed_drivetrain_btn = new JoystickButton(main_stick,
+      JoystickConst.MainStick.HIGH_SPEED_DRIVETRAIN_BUTTON);
+  JoystickButton mid_speed_drivetrain_btn = new JoystickButton(main_stick,
+      JoystickConst.MainStick.MID_SPEED_DRIVETRAIN_BUTTON);
+  JoystickButton low_speed_drivetrain_btn = new JoystickButton(main_stick,
+      JoystickConst.MainStick.LOW_SPEED_DRIVETRAIN_BUTTON);
   Joystick assist_stick = new Joystick(JoystickConst.ASSIST_STICK_PORT);
   JoystickButton sucker_in_btn = new JoystickButton(assist_stick, JoystickConst.AssistStick.SUCKER_IN_BUTTON);
   JoystickButton sucker_out_btn = new JoystickButton(assist_stick, JoystickConst.AssistStick.SUCKER_OUT_BUTTON);
@@ -77,13 +84,30 @@ public class RobotContainer {
     sucker_off_btn.whenPressed(new SuckerStop(intake_subsys));
     push_out_intake_btn.whenPressed(new PushOutIntake(intake_subsys));
     take_back_intake_btn.whenPressed(new TakeBackIntake(intake_subsys));
+    high_speed_drivetrain_btn.whenPressed(new HeadChangingDrive(drivetrain,
+        () -> DriveTrainConst.HIGH_SPEED_DRIVETRAIN
+            * main_stick.getRawAxis(JoystickConst.MainStick.LEFT_DRIVETRAIN_AXIS),
+        () -> DriveTrainConst.HIGH_SPEED_DRIVETRAIN
+            * main_stick.getRawAxis(JoystickConst.MainStick.RIGHT_DRIVETRAIN_AXIS)));
+    mid_speed_drivetrain_btn.whenPressed(new HeadChangingDrive(drivetrain,
+        () -> DriveTrainConst.MID_SPEED_DRIVETRAIN
+            * main_stick.getRawAxis(JoystickConst.MainStick.LEFT_DRIVETRAIN_AXIS),
+        () -> DriveTrainConst.MID_SPEED_DRIVETRAIN
+            * main_stick.getRawAxis(JoystickConst.MainStick.RIGHT_DRIVETRAIN_AXIS)));
+    low_speed_drivetrain_btn.whenPressed(new HeadChangingDrive(drivetrain,
+        () -> DriveTrainConst.LOW_SPEED_DRIVETRAIN
+            * main_stick.getRawAxis(JoystickConst.MainStick.LEFT_DRIVETRAIN_AXIS),
+        () -> DriveTrainConst.LOW_SPEED_DRIVETRAIN
+            * main_stick.getRawAxis(JoystickConst.MainStick.RIGHT_DRIVETRAIN_AXIS)));
   }
 
   private void setDefaultCommand() {
     CommandScheduler.getInstance().setDefaultCommand(drivetrain,
         new HeadChangingDrive(drivetrain,
-            () -> 0.5 * main_stick.getRawAxis(JoystickConst.MainStick.LEFT_DRIVETRAIN_AXIS),
-            () -> 0.5 * main_stick.getRawAxis(JoystickConst.MainStick.RIGHT_DRIVETRAIN_AXIS)));
+            () -> DriveTrainConst.MID_SPEED_DRIVETRAIN
+                * main_stick.getRawAxis(JoystickConst.MainStick.LEFT_DRIVETRAIN_AXIS),
+            () -> DriveTrainConst.MID_SPEED_DRIVETRAIN
+                * main_stick.getRawAxis(JoystickConst.MainStick.RIGHT_DRIVETRAIN_AXIS)));
     CommandScheduler.getInstance().setDefaultCommand(loading_subsys,
         new LoadPreShooting(loading_subsys, () -> LoadingConst.PRE_SHOOTING_MAX_SPEED
             * assist_stick.getRawAxis(JoystickConst.AssistStick.PRE_SHOOTING_AXIS)));
