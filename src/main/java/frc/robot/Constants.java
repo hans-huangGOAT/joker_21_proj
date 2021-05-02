@@ -47,6 +47,8 @@ public final class Constants {
             public static final int SUCKER_IN_BUTTON = 3;
             public static final int SUCKER_OUT_BUTTON = 5;
             public static final int SUCKER_OFF_BUTTON = 4;
+            public static final int PUSH_OUT_INTAKE_BUTTON = 7;
+            public static final int TAKE_BACK_INTAKE_BUTTON = 8;
         }
     }
 
@@ -55,16 +57,15 @@ public final class Constants {
         public static final int SUCKER_MOTOR_PORT = 9;
         public static final double SUCKER_IN_SPEED = 1;
         public static final double SUCKER_OUT_SPEED = 0.75;
-        public static final int EXPAN_SOLEN_PORT = 1;
+        public static final int EXPAN_SOLEN_PORT = 7;
         public static final boolean EXPAN_SOLEN_PUSH_OUT_MODE = true;
         public static final boolean EXPAN_SOLEN_TAKE_BACK_MODE = false;
-        public static final int SUCKING_DIRECTION_SIGN = 1;
     }
 
     // Unchanged Constants for Loading
     public static final class LoadingConst {
         public static final int ROUTER_MOTOR_PORT1 = 7;
-        public static final int ROUTER_MOTOR_PORT2 = 0;
+        public static final int ROUTER_MOTOR_PORT2 = 20;
         public static final int PRE_SHOOTING_MOTOR_PORT1 = 6;
         public static final int PRE_SHOOTING_MOTOR_PORT2 = 8;
     }

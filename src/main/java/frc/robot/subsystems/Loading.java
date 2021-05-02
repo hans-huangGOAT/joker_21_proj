@@ -34,27 +34,29 @@ public class Loading extends SubsystemBase {
   }
 
   public void router_in_same_speed(double router_speed) {
-
+    router.set(router_speed);
   }
 
-  public void router_in_left_faster(double router_speed, double diff) {
-
+  public void router_in_left_faster(double router_speed_upper_bound, double diff) {
+    router_left.set(router_speed_upper_bound);
+    router_right.set(router_speed_upper_bound - diff);
   }
 
-  public void router_in_right_faster(double router_speed, double diff) {
-
+  public void router_in_right_faster(double router_speed_upper_bound, double diff) {
+    router_left.set(router_speed_upper_bound - diff);
+    router_right.set(router_speed_upper_bound);
   }
 
   public void router_out(double router_speed) {
-
+    router.set(-router_speed);
   }
 
   public void pre_shooting_up(double pre_shooting_speed) {
-
+    pre_shooting.set(pre_shooting_speed);
   }
 
   public void pre_shooting_down(double pre_shooting_speed) {
-
+    pre_shooting.set(-pre_shooting_speed);
   }
 
 }

@@ -21,11 +21,11 @@ public class Intake extends SubsystemBase {
   }
 
   public void sucker_in(double sucking_speed) {
-    sucker_motor.set(IntakeConst.SUCKING_DIRECTION_SIGN * sucking_speed);
+    sucker_motor.set(sucking_speed);
   }
 
   public void sucker_out(double out_speed) {
-    sucker_motor.set(-IntakeConst.SUCKING_DIRECTION_SIGN * out_speed);
+    sucker_motor.set(-out_speed);
   }
 
   public void sucker_stop() {

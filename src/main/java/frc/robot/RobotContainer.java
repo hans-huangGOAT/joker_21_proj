@@ -10,9 +10,11 @@ import frc.robot.Constants.IntakeConst;
 import frc.robot.Constants.JoystickConst;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.drivetrain.HeadChangingDrive;
+import frc.robot.commands.intake.PushOutIntake;
 import frc.robot.commands.intake.SuckerIn;
 import frc.robot.commands.intake.SuckerOut;
 import frc.robot.commands.intake.SuckerStop;
+import frc.robot.commands.intake.TakeBackIntake;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
@@ -34,6 +36,10 @@ public class RobotContainer {
   JoystickButton sucker_in_btn = new JoystickButton(assist_stick, JoystickConst.AssistStick.SUCKER_IN_BUTTON);
   JoystickButton sucker_out_btn = new JoystickButton(assist_stick, JoystickConst.AssistStick.SUCKER_OUT_BUTTON);
   JoystickButton sucker_off_btn = new JoystickButton(assist_stick, JoystickConst.AssistStick.SUCKER_OFF_BUTTON);
+  JoystickButton push_out_intake_btn = new JoystickButton(assist_stick,
+      JoystickConst.AssistStick.PUSH_OUT_INTAKE_BUTTON);
+  JoystickButton take_back_intake_btn = new JoystickButton(assist_stick,
+      JoystickConst.AssistStick.TAKE_BACK_INTAKE_BUTTON);
 
   // The robot's subsystems are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
@@ -64,6 +70,8 @@ public class RobotContainer {
     sucker_in_btn.whenPressed(new SuckerIn(intake_subsys, () -> IntakeConst.SUCKER_IN_SPEED), true);
     sucker_out_btn.whileHeld(new SuckerOut(intake_subsys, () -> IntakeConst.SUCKER_OUT_SPEED), true);
     sucker_off_btn.whenPressed(new SuckerStop(intake_subsys));
+    push_out_intake_btn.whenPressed(new PushOutIntake(intake_subsys));
+    take_back_intake_btn.whenPressed(new TakeBackIntake(intake_subsys));
   }
 
   private void setDefaultCommand() {
