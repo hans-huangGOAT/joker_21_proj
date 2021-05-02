@@ -30,12 +30,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // Joysticks and joystick buttons are defined here...
   Joystick main_stick = new Joystick(JoystickConst.MAIN_STICK_PORT);
-  JoystickButton high_speed_drivetrain_btn = new JoystickButton(main_stick,
-      JoystickConst.MainStick.HIGH_SPEED_DRIVETRAIN_BUTTON);
-  JoystickButton mid_speed_drivetrain_btn = new JoystickButton(main_stick,
-      JoystickConst.MainStick.MID_SPEED_DRIVETRAIN_BUTTON);
-  JoystickButton low_speed_drivetrain_btn = new JoystickButton(main_stick,
-      JoystickConst.MainStick.LOW_SPEED_DRIVETRAIN_BUTTON);
   Joystick assist_stick = new Joystick(JoystickConst.ASSIST_STICK_PORT);
   JoystickButton sucker_in_btn = new JoystickButton(assist_stick, JoystickConst.AssistStick.SUCKER_IN_BUTTON);
   JoystickButton sucker_out_btn = new JoystickButton(assist_stick, JoystickConst.AssistStick.SUCKER_OUT_BUTTON);

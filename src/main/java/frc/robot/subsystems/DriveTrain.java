@@ -43,8 +43,8 @@ public class DriveTrain extends SubsystemBase {
   /*
    * control the drivetrain via tank drive mode
    */
-  public void tankDrive(double LEFT_SPEED, double RIGHT_SPEED) {
-    drivetrain.tankDrive(LEFT_SPEED, RIGHT_SPEED);
+  public void tankDrive(double left_speed, double right_speed) {
+    drivetrain.tankDrive(left_speed, right_speed);
   }
 
   /*

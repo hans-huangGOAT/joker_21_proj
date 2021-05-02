@@ -61,4 +61,12 @@ public final class Constants {
         public static final int SUCKING_DIRECTION_SIGN = 1;
     }
 
+    // Unchanged Constants for Loading
+    public static final class LoadingConst {
+        public static final int ROUTER_MOTOR_PORT1 = 7;
+        public static final int ROUTER_MOTOR_PORT2 = 0;
+        public static final int PRE_SHOOTING_MOTOR_PORT1 = 6;
+        public static final int PRE_SHOOTING_MOTOR_PORT2 = 8;
+    }
+
 }
