@@ -25,8 +25,6 @@ public class DriveTrain extends SubsystemBase {
 
   private final ADXRS450_Gyro gyro;
 
-  private double speed = 0.75;
-
   /** Creates a new DriveTrain. */
   public DriveTrain() {
     left_motor_1 = new WPI_VictorSPX(DriveTrainConst.LEFT_MOTOR_PORT1);
@@ -61,18 +59,6 @@ public class DriveTrain extends SubsystemBase {
    */
   public void resetGyro() {
     gyro.reset();
-  }
-
-  public void setHighSpeed() {
-    speed = DriveTrainConst.HIGH_SPEED_DRIVETRAIN;
-  }
-
-  public void setMidSpeed() {
-    speed = DriveTrainConst.MIDDLE_SPEED_DRIVETRAIN;
-  }
-
-  public void setLowSpeed() {
-    speed = DriveTrainConst.LOW_SPEED_DRIVETRAIN;
   }
 
   @Override

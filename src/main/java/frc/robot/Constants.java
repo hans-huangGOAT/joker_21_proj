@@ -38,6 +38,9 @@ public final class Constants {
         public static final class MainStick {
             public static final int LEFT_DRIVETRAIN_AXIS = 1;
             public static final int RIGHT_DRIVETRAIN_AXIS = 3;
+            public static final int HIGH_SPEED_DRIVETRAIN_BUTTON = 3;
+            public static final int MID_SPEED_DRIVETRAIN_BUTTON = 2;
+            public static final int LOW_SPEED_DRIVETRAIN_BUTTON = 1;
         }
 
         public static final class AssistStick {
