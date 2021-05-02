@@ -10,7 +10,6 @@ import frc.robot.Constants.DriveTrainConst;
 import frc.robot.Constants.IntakeConst;
 import frc.robot.Constants.JoystickConst;
 import frc.robot.Constants.LoadingConst;
-import frc.robot.Constants.JoystickConst.AssistStick;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.drivetrain.HeadChangingDrive;
 import frc.robot.commands.intake.PushOutIntake;
@@ -19,10 +18,12 @@ import frc.robot.commands.intake.SuckerOut;
 import frc.robot.commands.intake.SuckerStop;
 import frc.robot.commands.intake.TakeBackIntake;
 import frc.robot.commands.loading.LoadPreShooting;
+import frc.robot.commands.shooter.GetTXofLM;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Loading;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -60,6 +61,7 @@ public class RobotContainer {
   private final DriveTrain drivetrain = new DriveTrain();
   private final Intake intake_subsys = new Intake();
   private final Loading loading_subsys = new Loading();
+  private final Shooter shooter_subsys = new Shooter();
 
   // The robot's commands are defined here...
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
@@ -114,6 +116,7 @@ public class RobotContainer {
     CommandScheduler.getInstance().setDefaultCommand(loading_subsys,
         new LoadPreShooting(loading_subsys, () -> LoadingConst.PRE_SHOOTING_MAX_SPEED
             * assist_stick.getRawAxis(JoystickConst.AssistStick.PRE_SHOOTING_AXIS)));
+    CommandScheduler.getInstance().setDefaultCommand(shooter_subsys, new GetTXofLM(shooter_subsys));
   }
 
   /**
