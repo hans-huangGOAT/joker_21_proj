@@ -9,15 +9,17 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Loading;
 
-public class LoadPreShooting extends CommandBase {
+public class LoadingIn extends CommandBase {
   private final Loading loading_subsys;
   private final DoubleSupplier pre_shooting_speed;
+  private final DoubleSupplier router_speed;
 
   /** Creates a new LoadPreShooting. */
-  public LoadPreShooting(Loading loading_subsys, DoubleSupplier pre_shooting_speed) {
+  public LoadingIn(Loading loading_subsys, DoubleSupplier pre_shooting_speed, DoubleSupplier router_speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.loading_subsys = loading_subsys;
     this.pre_shooting_speed = pre_shooting_speed;
+    this.router_speed = router_speed;
     addRequirements(loading_subsys);
   }
 
@@ -30,6 +32,7 @@ public class LoadPreShooting extends CommandBase {
   @Override
   public void execute() {
     loading_subsys.loadPreShooting(pre_shooting_speed.getAsDouble());
+    loading_subsys.router_in_same_speed(router_speed.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.
