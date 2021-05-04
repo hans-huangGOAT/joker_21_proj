@@ -1,4 +1,5 @@
 | ID | Hardware | 作用 |
+| ------ |------| ------|
 | 00 | Victor SPX | 左底盘 |
 | 01 | Victor SPX | 左底盘 |
 | 02 | Victor SPX | 左底盘 |
