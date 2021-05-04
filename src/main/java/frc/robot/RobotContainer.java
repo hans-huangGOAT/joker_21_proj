@@ -19,6 +19,7 @@ import frc.robot.commands.intake.SuckerStop;
 import frc.robot.commands.intake.TakeBackIntake;
 import frc.robot.commands.loading.LoadingIn;
 import frc.robot.commands.shooter.GetTXofLM;
+import frc.robot.commands.shooter.SetShooter;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
@@ -117,6 +118,7 @@ public class RobotContainer {
                 () -> LoadingConst.PRE_SHOOTING_SPEED * assist_stick.getRawAxis(JoystickConst.AssistStick.LOADING_AXIS),
                 () -> LoadingConst.ROUTER_IN_SPEED * assist_stick.getRawAxis(JoystickConst.AssistStick.LOADING_AXIS)));
         CommandScheduler.getInstance().setDefaultCommand(shooter_subsys, new GetTXofLM(shooter_subsys));
+        CommandScheduler.getInstance().setDefaultCommand(intake_subsys, new TakeBackIntake(intake_subsys));
     }
 
     /**

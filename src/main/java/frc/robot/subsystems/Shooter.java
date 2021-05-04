@@ -30,8 +30,8 @@ public class Shooter extends SubsystemBase {
     adjuster_hor.set(speed);
   }
 
-  public void setShooter(double speed) {
-    shooter.set(speed);
+  public void setShooter(double shooter_speed) {
+    shooter.set(shooter_speed);
   }
 
   @Override

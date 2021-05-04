@@ -26,6 +26,7 @@ public class Loading extends SubsystemBase {
     pre_shooting1 = new WPI_VictorSPX(LoadingConst.PRE_SHOOTING_MOTOR_PORT1);
     pre_shooting2 = new WPI_VictorSPX(LoadingConst.PRE_SHOOTING_MOTOR_PORT2);
     pre_shooting = new SpeedControllerGroup(pre_shooting1, pre_shooting2);
+    router.setInverted(true);
   }
 
   @Override

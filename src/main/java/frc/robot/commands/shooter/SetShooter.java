@@ -4,18 +4,21 @@
 
 package frc.robot.commands.shooter;
 
-import edu.wpi.first.networktables.NetworkTableInstance;
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
-public class GetTXofLM extends CommandBase {
+public class SetShooter extends CommandBase {
   private final Shooter shooter_subsys;
+  private final DoubleSupplier shooter_speed;
 
-  /** Creates a new GetTXofLM. */
-  public GetTXofLM(Shooter shooter_subsys) {
+  /** Creates a new SetShooter. */
+  public SetShooter(Shooter shooter_subsys, DoubleSupplier shooter_speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.shooter_subsys = shooter_subsys;
-    addRequirements(this.shooter_subsys);
+    this.shooter_speed = shooter_speed;
+    addRequirements(shooter_subsys);
   }
 
   // Called when the command is initially scheduled.
@@ -26,8 +29,8 @@ public class GetTXofLM extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double tx = NetworkTableInstance.getDefault().getTable("limelight-joker").getEntry("tx").getDouble(0);
-    // System.out.println(tx);
+    System.out.println("a");
+    shooter_subsys.setShooter(shooter_speed.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.
