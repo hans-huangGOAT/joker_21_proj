@@ -9,18 +9,16 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Loading;
 
-public class LoadingIn extends CommandBase {
+public class RouterSameSpeedCtrl extends CommandBase {
   private final Loading loading_subsys;
-  private final DoubleSupplier pre_shooting_speed;
-  private final DoubleSupplier router_speed;
+  private final DoubleSupplier speed;
 
-  /** Creates a new LoadPreShooting. */
-  public LoadingIn(Loading loading_subsys, DoubleSupplier pre_shooting_speed, DoubleSupplier router_speed) {
+  /** Creates a new RouterSameSpeedCtrl. */
+  public RouterSameSpeedCtrl(Loading loading_subsys, DoubleSupplier speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.loading_subsys = loading_subsys;
-    this.pre_shooting_speed = pre_shooting_speed;
-    this.router_speed = router_speed;
-    addRequirements(loading_subsys);
+    this.speed = speed;
+    addRequirements(this.loading_subsys);
   }
 
   // Called when the command is initially scheduled.
@@ -31,8 +29,7 @@ public class LoadingIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    loading_subsys.loadPreShooting(pre_shooting_speed.getAsDouble());
-    loading_subsys.router_set_same_speed(router_speed.getAsDouble());
+    loading_subsys.router_set_same_speed(speed.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.

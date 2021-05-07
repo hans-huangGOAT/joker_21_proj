@@ -34,22 +34,18 @@ public class Loading extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void router_in_same_speed(double router_speed) {
+  public void router_set_same_speed(double router_speed) {
     router.set(router_speed);
   }
 
-  public void router_in_left_faster(double router_speed_upper_bound, double diff) {
+  public void router_set_left_faster(double router_speed_upper_bound, double diff_percentage) {
     router_left.set(router_speed_upper_bound);
-    router_right.set(router_speed_upper_bound - diff);
+    router_right.set(router_speed_upper_bound * diff_percentage);
   }
 
-  public void router_in_right_faster(double router_speed_upper_bound, double diff) {
-    router_left.set(router_speed_upper_bound - diff);
+  public void router_set_right_faster(double router_speed_upper_bound, double diff_percentage) {
+    router_left.set(router_speed_upper_bound * diff_percentage);
     router_right.set(router_speed_upper_bound);
-  }
-
-  public void router_out(double router_speed) {
-    router.set(-router_speed);
   }
 
   public void loadPreShooting(double pre_shooting_speed) {

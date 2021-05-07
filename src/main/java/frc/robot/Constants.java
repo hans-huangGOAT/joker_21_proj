@@ -72,7 +72,8 @@ public final class Constants {
         public static final int PRE_SHOOTING_MOTOR_PORT1 = 6;
         public static final int PRE_SHOOTING_MOTOR_PORT2 = 8;
         public static final double PRE_SHOOTING_SPEED = 0.7;
-        public static final double ROUTER_IN_SPEED = 0.6;
+        public static final double ROUTER_IN_SPEED = 0.7;
+        public static final double ROUTER_IN_SPEED_DIFF_PERCENTAGE = 0.8;
     }
 
     // Unchanged Constants for Shooter
@@ -87,6 +88,8 @@ public final class Constants {
     // Unchanged Constants for Adjuster
     public static final class AdjusterConst {
         public static final int ADJUSTER_HOR_MOTOR_PORT = 10;
+        public static final int LEFT_BOUND_LIMIT_PORT = 4;
+        public static final int RIGHT_BOUND_LIMIT_PORT = 5;
 
     }
 

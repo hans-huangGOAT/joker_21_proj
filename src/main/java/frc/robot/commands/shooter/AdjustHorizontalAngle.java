@@ -30,7 +30,14 @@ public class AdjustHorizontalAngle extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    adjuster_subsys.set_adjuster_hor(speed.getAsDouble());
+    // if speed < 0, turn right; speed > 0 turn left
+    if (adjuster_subsys.get_left_bound_limit() && speed.getAsDouble() > 0) {
+      adjuster_subsys.set_adjuster_hor(0);
+    } else if (adjuster_subsys.get_right_bound_limit() && speed.getAsDouble() < 0) {
+      adjuster_subsys.set_adjuster_hor(0);
+    } else {
+      adjuster_subsys.set_adjuster_hor(speed.getAsDouble());
+    }
   }
 
   // Called once the command ends or is interrupted.
