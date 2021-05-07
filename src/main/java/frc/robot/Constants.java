@@ -71,6 +71,9 @@ public final class Constants {
         public static final int ROUTER_MOTOR_PORT2 = 13;
         public static final int PRE_SHOOTING_MOTOR_PORT1 = 6;
         public static final int PRE_SHOOTING_MOTOR_PORT2 = 8;
+        public static final int LOWER_DETECTOR_PORT = 6;
+        public static final int MID_DETECTOR_PORT = 7;
+        public static final int UPPER_DETECTOR_PORT = 8;
         public static final double PRE_SHOOTING_SPEED = 0.7;
         public static final double ROUTER_IN_SPEED = 0.7;
         public static final double ROUTER_IN_SPEED_DIFF_PERCENTAGE = 0.8;
@@ -90,6 +93,7 @@ public final class Constants {
         public static final int ADJUSTER_HOR_MOTOR_PORT = 10;
         public static final int LEFT_BOUND_LIMIT_PORT = 4;
         public static final int RIGHT_BOUND_LIMIT_PORT = 5;
+        public static final double ADJUST_TO_TARGET_SPEED = 0.3;
 
     }
 

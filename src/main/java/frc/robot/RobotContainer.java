@@ -17,11 +17,11 @@ import frc.robot.commands.intake.SuckerIn;
 import frc.robot.commands.intake.SuckerOut;
 import frc.robot.commands.intake.SuckerStop;
 import frc.robot.commands.intake.TakeBackIntake;
+import frc.robot.commands.loading.AutoLoadingBalls;
 import frc.robot.commands.loading.LoadingIn;
 import frc.robot.commands.shooter.AcceleratingShooter;
-import frc.robot.commands.shooter.AdjustHorizontalAngle;
-import frc.robot.commands.shooter.GetTXofLM;
-import frc.robot.commands.shooter.SetShooter;
+import frc.robot.commands.adjuster.AdjustHorizontalAngle;
+import frc.robot.commands.adjuster.AdjustToTarget;
 import frc.robot.commands.shooter.StopShooter;
 import frc.robot.subsystems.Adjuster;
 import frc.robot.subsystems.DriveTrain;
@@ -120,6 +120,8 @@ public class RobotContainer {
                                                 .getRawAxis(JoystickConst.MainStick.RIGHT_DRIVETRAIN_AXIS)));
                 shooter_trigger_btn.whenPressed(new AcceleratingShooter(shooter_subsys), true);
                 stop_shooter_btn.whenPressed(new StopShooter(shooter_subsys), true);
+                new JoystickButton(test_stick, 3).whenPressed(new AutoLoadingBalls(loading_subsys));
+                new JoystickButton(test_stick, 5).whenPressed(new AdjustToTarget(adjuster_subsys));
         }
 
         private void setDefaultCommand() {

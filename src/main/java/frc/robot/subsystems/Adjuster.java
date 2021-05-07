@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.AdjusterConst;
@@ -25,7 +26,14 @@ public class Adjuster extends SubsystemBase {
   }
 
   public void set_adjuster_hor(double speed) {
-    adjuster_hor.set(speed);
+    // if speed < 0, turn right; speed > 0 turn left
+    if (get_left_bound_limit() && speed > 0) {
+      adjuster_hor.set(0);
+    } else if (get_right_bound_limit() && speed < 0) {
+      adjuster_hor.set(0);
+    } else {
+      adjuster_hor.set(speed);
+    }
   }
 
   public boolean get_left_bound_limit() {
@@ -34,6 +42,11 @@ public class Adjuster extends SubsystemBase {
 
   public boolean get_right_bound_limit() {
     return !right_bound_limit.get();
+  }
+
+  public double get_lm_off_center_Xvalue() {
+    // tx < 0, target is on the left; tx > 0, target is on the right(of the shooter)
+    return NetworkTableInstance.getDefault().getTable("limelight-joker").getEntry("tx").getDouble(0);
   }
 
   @Override

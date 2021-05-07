@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.LoadingConst;
@@ -17,6 +18,9 @@ public class Loading extends SubsystemBase {
   private final WPI_VictorSPX pre_shooting2;
   private final SpeedControllerGroup router;
   private final SpeedControllerGroup pre_shooting;
+  private final DigitalInput lower_detector;
+  private final DigitalInput mid_detector;
+  private final DigitalInput upper_detector;
 
   /** Creates a new Loading. */
   public Loading() {
@@ -26,6 +30,9 @@ public class Loading extends SubsystemBase {
     pre_shooting1 = new WPI_VictorSPX(LoadingConst.PRE_SHOOTING_MOTOR_PORT1);
     pre_shooting2 = new WPI_VictorSPX(LoadingConst.PRE_SHOOTING_MOTOR_PORT2);
     pre_shooting = new SpeedControllerGroup(pre_shooting1, pre_shooting2);
+    lower_detector = new DigitalInput(LoadingConst.LOWER_DETECTOR_PORT);
+    mid_detector = new DigitalInput(LoadingConst.MID_DETECTOR_PORT);
+    upper_detector = new DigitalInput(LoadingConst.UPPER_DETECTOR_PORT);
     router.setInverted(true);
   }
 
@@ -50,6 +57,18 @@ public class Loading extends SubsystemBase {
 
   public void loadPreShooting(double pre_shooting_speed) {
     pre_shooting.set(pre_shooting_speed);
+  }
+
+  public boolean getLowerDetec() {
+    return !lower_detector.get();
+  }
+
+  public boolean getMidDetec() {
+    return !mid_detector.get();
+  }
+
+  public boolean getUpperDetec() {
+    return !upper_detector.get();
   }
 
 }
