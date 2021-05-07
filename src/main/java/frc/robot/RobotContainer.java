@@ -19,9 +19,11 @@ import frc.robot.commands.intake.SuckerStop;
 import frc.robot.commands.intake.TakeBackIntake;
 import frc.robot.commands.loading.LoadingIn;
 import frc.robot.commands.shooter.AcceleratingShooter;
+import frc.robot.commands.shooter.AdjustHorizontalAngle;
 import frc.robot.commands.shooter.GetTXofLM;
 import frc.robot.commands.shooter.SetShooter;
 import frc.robot.commands.shooter.StopShooter;
+import frc.robot.subsystems.Adjuster;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
@@ -73,6 +75,7 @@ public class RobotContainer {
         private final Intake intake_subsys = new Intake();
         private final Loading loading_subsys = new Loading();
         private final Shooter shooter_subsys = new Shooter();
+        private final Adjuster adjuster_subsys = new Adjuster();
 
         // The robot's commands are defined here...
         private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
@@ -130,7 +133,8 @@ public class RobotContainer {
                                                 * assist_stick.getRawAxis(JoystickConst.AssistStick.LOADING_AXIS),
                                 () -> LoadingConst.ROUTER_IN_SPEED
                                                 * assist_stick.getRawAxis(JoystickConst.AssistStick.LOADING_AXIS)));
-                CommandScheduler.getInstance().setDefaultCommand(shooter_subsys, new GetTXofLM(shooter_subsys));
+                CommandScheduler.getInstance().setDefaultCommand(adjuster_subsys,
+                                new AdjustHorizontalAngle(adjuster_subsys, () -> test_stick.getRawAxis(1)));
                 CommandScheduler.getInstance().setDefaultCommand(intake_subsys, new TakeBackIntake(intake_subsys));
         }
 

@@ -15,19 +15,13 @@ public class Shooter extends SubsystemBase {
   private final WPI_TalonFX shooter1;
   private final WPI_TalonFX shooter2;
   private final SpeedControllerGroup shooter;
-  private final WPI_VictorSPX adjuster_hor;
 
   /** Creates a new Shooter. */
   public Shooter() {
     shooter1 = new WPI_TalonFX(ShooterConst.SHOOTER_MOTOR_PORT1);
     shooter2 = new WPI_TalonFX(ShooterConst.SHOOTER_MOTOR_PORT2);
     shooter = new SpeedControllerGroup(shooter1, shooter2);
-    adjuster_hor = new WPI_VictorSPX(ShooterConst.ADJUSTER_LR_MOTOR_PORT);
     shooter2.setInverted(true);
-  }
-
-  public void adjusting_hor_angle(double speed) {
-    adjuster_hor.set(speed);
   }
 
   public void setShooter(double shooter_speed) {
