@@ -81,7 +81,8 @@ public final class Constants {
         public static final int SHOOTER_MOTOR_PORT2 = 12;
         public static final int ADJUSTER_LR_MOTOR_PORT = 10;
         public static final double SHOOTER_MAX_SPEED = 1;
-        public static final double SHOOTER_STEP_ACCELERATION = 0.00065;
+        public static final double SHOOTER_STEP_ACCELERATION = 0.0001;
+        public static final double SHOOTER_MAX_ACCELERATION = 0.05;
     }
 
 }

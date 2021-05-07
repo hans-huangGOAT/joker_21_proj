@@ -31,9 +31,15 @@ public class AcceleratingShooter extends CommandBase {
   public void execute() {
     double acceleration = 0;
     while (shooter_speed < ShooterConst.SHOOTER_MAX_SPEED) {
-      shooter_speed += ShooterConst.SHOOTER_STEP_ACCELERATION;
+      if (acceleration < ShooterConst.SHOOTER_MAX_ACCELERATION) {
+        acceleration += ShooterConst.SHOOTER_STEP_ACCELERATION;
+      }
+      shooter_speed += acceleration;
       shooter_subsys.setShooter(shooter_speed);
     }
+    do {
+      System.out.println("success");
+    } while (false);
   }
 
   // Called once the command ends or is interrupted.
