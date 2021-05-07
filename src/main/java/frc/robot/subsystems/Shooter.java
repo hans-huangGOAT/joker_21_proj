@@ -7,7 +7,6 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConst;
@@ -24,6 +23,7 @@ public class Shooter extends SubsystemBase {
     shooter2 = new WPI_TalonFX(ShooterConst.SHOOTER_MOTOR_PORT2);
     shooter = new SpeedControllerGroup(shooter1, shooter2);
     adjuster_hor = new WPI_VictorSPX(ShooterConst.ADJUSTER_LR_MOTOR_PORT);
+    shooter2.setInverted(true);
   }
 
   public void adjusting_hor_angle(double speed) {

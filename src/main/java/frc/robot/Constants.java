@@ -50,6 +50,8 @@ public final class Constants {
             public static final int PUSH_OUT_INTAKE_BUTTON = 7;
             public static final int TAKE_BACK_INTAKE_BUTTON = 8;
             public static final int LOADING_AXIS = 1;
+            public static final int SHOOTER_TRIGGER_BUTTON = 1;
+            public static final int STOP_SHOOTER_BUTTON = 2;
         }
     }
 
@@ -69,8 +71,8 @@ public final class Constants {
         public static final int ROUTER_MOTOR_PORT2 = 13;
         public static final int PRE_SHOOTING_MOTOR_PORT1 = 6;
         public static final int PRE_SHOOTING_MOTOR_PORT2 = 8;
-        public static final double PRE_SHOOTING_SPEED = 0.6;
-        public static final double ROUTER_IN_SPEED = 0.8;
+        public static final double PRE_SHOOTING_SPEED = 0.7;
+        public static final double ROUTER_IN_SPEED = 0.6;
     }
 
     // Unchanged Constants for Shooter
@@ -78,6 +80,8 @@ public final class Constants {
         public static final int SHOOTER_MOTOR_PORT1 = 11;
         public static final int SHOOTER_MOTOR_PORT2 = 12;
         public static final int ADJUSTER_LR_MOTOR_PORT = 10;
+        public static final double SHOOTER_MAX_SPEED = 1;
+        public static final double SHOOTER_STEP_ACCELERATION = 0.00065;
     }
 
 }

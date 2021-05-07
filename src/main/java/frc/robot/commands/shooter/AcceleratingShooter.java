@@ -4,33 +4,36 @@
 
 package frc.robot.commands.shooter;
 
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.ShooterConst;
 import frc.robot.subsystems.Shooter;
 
-public class SetShooter extends CommandBase {
+public class AcceleratingShooter extends CommandBase {
   private final Shooter shooter_subsys;
-  private final DoubleSupplier shooter_speed;
+  private double shooter_speed = 0;
 
-  /** Creates a new SetShooter. */
-  public SetShooter(Shooter shooter_subsys, DoubleSupplier shooter_speed) {
+  /** Creates a new AcceleratingShooter. */
+  public AcceleratingShooter(Shooter shooter_subsys) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.shooter_subsys = shooter_subsys;
-    this.shooter_speed = shooter_speed;
-    addRequirements(shooter_subsys);
+    addRequirements(this.shooter_subsys);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    shooter_subsys.setShooter(0);
+    shooter_speed = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println(shooter_speed.getAsDouble());
-    shooter_subsys.setShooter(shooter_speed.getAsDouble());
+    double acceleration = 0;
+    while (shooter_speed < ShooterConst.SHOOTER_MAX_SPEED) {
+      shooter_speed += ShooterConst.SHOOTER_STEP_ACCELERATION;
+      shooter_subsys.setShooter(shooter_speed);
+    }
   }
 
   // Called once the command ends or is interrupted.
