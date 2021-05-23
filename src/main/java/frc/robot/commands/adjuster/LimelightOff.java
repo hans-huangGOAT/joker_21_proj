@@ -5,14 +5,13 @@
 package frc.robot.commands.adjuster;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.AdjusterConst;
 import frc.robot.subsystems.Adjuster;
 
-public class AdjustToTarget extends CommandBase {
+public class LimelightOff extends CommandBase {
   private final Adjuster adjuster_subsys;
 
-  /** Creates a new AdjustToTarget. */
-  public AdjustToTarget(Adjuster adjuster_subsys) {
+  /** Creates a new LimelightOff. */
+  public LimelightOff(Adjuster adjuster_subsys) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.adjuster_subsys = adjuster_subsys;
     addRequirements(adjuster_subsys);
@@ -21,22 +20,12 @@ public class AdjustToTarget extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    adjuster_subsys.light_on();
+    adjuster_subsys.light_off();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (adjuster_subsys.get_lm_off_center_Xvalue() > 3) {
-      System.out.println("a");
-      adjuster_subsys.set_adjuster_hor(-AdjusterConst.ADJUST_TO_TARGET_SPEED);
-    } else if (adjuster_subsys.get_lm_off_center_Xvalue() < -3) {
-      System.out.println("b");
-      adjuster_subsys.set_adjuster_hor(AdjusterConst.ADJUST_TO_TARGET_SPEED);
-    } else {
-      System.out.println("c");
-      adjuster_subsys.set_adjuster_hor(0);
-    }
   }
 
   // Called once the command ends or is interrupted.

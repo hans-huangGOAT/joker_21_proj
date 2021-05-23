@@ -24,12 +24,13 @@ public class AdjustHorizontalAngle extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    adjuster_subsys.light_off();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println(adjuster_subsys.get_lm_off_center_Xvalue());
+    // System.out.println(adjuster_subsys.get_lm_off_center_Xvalue());
     adjuster_subsys.set_adjuster_hor(speed.getAsDouble());
   }
 

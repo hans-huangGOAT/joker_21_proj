@@ -24,22 +24,21 @@ public class AcceleratingShooter extends CommandBase {
   public void initialize() {
     shooter_subsys.setShooter(0);
     shooter_speed = 0;
+    double acceleration = 0;
+    while (shooter_speed < ShooterConst.SHOOTER_MAX_SPEED) {
+      // if (acceleration < ShooterConst.SHOOTER_MAX_ACCELERATION) {
+      // acceleration += ShooterConst.SHOOTER_STEP_ACCELERATION;
+      // }
+      shooter_speed += 0.0001;
+      shooter_subsys.setShooter(shooter_speed);
+    }
+    System.out.println("success");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double acceleration = 0;
-    while (shooter_speed < ShooterConst.SHOOTER_MAX_SPEED) {
-      if (acceleration < ShooterConst.SHOOTER_MAX_ACCELERATION) {
-        acceleration += ShooterConst.SHOOTER_STEP_ACCELERATION;
-      }
-      shooter_speed += acceleration;
-      shooter_subsys.setShooter(shooter_speed);
-    }
-    do {
-      System.out.println("success");
-    } while (false);
+    // shooter_subsys.setShooter(ShooterConst.SHOOTER_MAX_SPEED);
   }
 
   // Called once the command ends or is interrupted.

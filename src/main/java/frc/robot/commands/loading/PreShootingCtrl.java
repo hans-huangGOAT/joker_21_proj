@@ -4,6 +4,7 @@
 
 package frc.robot.commands.loading;
 
+import java.sql.Time;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -12,6 +13,8 @@ import frc.robot.subsystems.Loading;
 public class PreShootingCtrl extends CommandBase {
   private final Loading loading_subsys;
   private final DoubleSupplier speed;
+  private double counter = 1;
+  private boolean flag = false;
 
   /** Creates a new PreShootingCtrl. */
   public PreShootingCtrl(Loading loading_subsys, DoubleSupplier speed) {
@@ -24,11 +27,21 @@ public class PreShootingCtrl extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if (!flag) {
+
+      while (counter < 55000000) {
+        System.out.println(counter);
+
+        counter++;
+      }
+      flag = true;
+    }
     loading_subsys.loadPreShooting(speed.getAsDouble());
   }
 

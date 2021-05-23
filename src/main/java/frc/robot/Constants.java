@@ -23,6 +23,8 @@ public final class Constants {
         public static final int RIGHT_MOTOR_PORT1 = 3;
         public static final int RIGHT_MOTOR_PORT2 = 4;
         public static final int RIGHT_MOTOR_PORT3 = 5;
+        public static final int[] LEFT_ENCODER_PORT = { 4, 5 };
+        public static final int[] RIGHT_ENCODER_PORT = { 6, 7 };
 
         public static final double HIGH_SPEED_DRIVETRAIN = 1;
         public static final double MID_SPEED_DRIVETRAIN = 0.75;
@@ -52,6 +54,8 @@ public final class Constants {
             public static final int LOADING_AXIS = 1;
             public static final int SHOOTER_TRIGGER_BUTTON = 1;
             public static final int STOP_SHOOTER_BUTTON = 2;
+            public static final int ADJUSTER_VER_UP_BUTTON = 9;
+            public static final int ADJUSTER_VER_DOWN_BUTTON = 10;
         }
     }
 
@@ -60,9 +64,9 @@ public final class Constants {
         public static final int SUCKER_MOTOR_PORT = 9;
         public static final double SUCKER_IN_SPEED = 1;
         public static final double SUCKER_OUT_SPEED = 0.75;
-        public static final int EXPAN_SOLEN_PORT = 7;
-        public static final boolean EXPAN_SOLEN_PUSH_OUT_MODE = true;
-        public static final boolean EXPAN_SOLEN_TAKE_BACK_MODE = false;
+        public static final int EXPAN_SOLEN_PORT = 6;
+        public static final boolean EXPAN_SOLEN_PUSH_OUT_MODE = false;
+        public static final boolean EXPAN_SOLEN_TAKE_BACK_MODE = true;
     }
 
     // Unchanged Constants for Loading
@@ -71,8 +75,8 @@ public final class Constants {
         public static final int ROUTER_MOTOR_PORT2 = 13;
         public static final int PRE_SHOOTING_MOTOR_PORT1 = 6;
         public static final int PRE_SHOOTING_MOTOR_PORT2 = 8;
-        public static final int LOWER_DETECTOR_PORT = 6;
-        public static final int MID_DETECTOR_PORT = 7;
+        public static final int LOWER_DETECTOR_PORT = 1;
+        public static final int MID_DETECTOR_PORT = 0;
         public static final int UPPER_DETECTOR_PORT = 8;
         public static final double PRE_SHOOTING_SPEED = 0.7;
         public static final double ROUTER_IN_SPEED = 0.7;
@@ -83,7 +87,7 @@ public final class Constants {
     public static final class ShooterConst {
         public static final int SHOOTER_MOTOR_PORT1 = 11;
         public static final int SHOOTER_MOTOR_PORT2 = 12;
-        public static final double SHOOTER_MAX_SPEED = 1;
+        public static final double SHOOTER_MAX_SPEED = 0.81;
         public static final double SHOOTER_STEP_ACCELERATION = 0.0001;
         public static final double SHOOTER_MAX_ACCELERATION = 0.05;
     }
@@ -91,10 +95,16 @@ public final class Constants {
     // Unchanged Constants for Adjuster
     public static final class AdjusterConst {
         public static final int ADJUSTER_HOR_MOTOR_PORT = 10;
-        public static final int LEFT_BOUND_LIMIT_PORT = 4;
-        public static final int RIGHT_BOUND_LIMIT_PORT = 5;
+        public static final int ADJUSTER_VER_SOLEN_PORT = 7;
+        public static final int LEFT_BOUND_LIMIT_PORT = 2;
+        public static final int RIGHT_BOUND_LIMIT_PORT = 3;
         public static final double ADJUST_TO_TARGET_SPEED = 0.3;
+    }
 
+    // Unchanged Constants for Autonomous Period
+    public static final class AutoConst {
+        public static final double DRIVETRAIN_SPEED = 0.4;
+        public static final double SUCKER_IN_SPEED = 1;
     }
 
 }

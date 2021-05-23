@@ -4,13 +4,25 @@
 
 package frc.robot;
 
+import java.util.Arrays;
+import java.util.List;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.controller.RamseteController;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.geometry.Translation2d;
+import edu.wpi.first.wpilibj.trajectory.Trajectory;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
+import edu.wpi.first.wpilibj.util.Units;
 import frc.robot.Constants.DriveTrainConst;
 import frc.robot.Constants.IntakeConst;
 import frc.robot.Constants.JoystickConst;
 import frc.robot.Constants.LoadingConst;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.StopShooterAndLm;
 import frc.robot.commands.drivetrain.HeadChangingDrive;
 import frc.robot.commands.intake.PushOutIntake;
 import frc.robot.commands.intake.SuckerIn;
@@ -22,6 +34,10 @@ import frc.robot.commands.loading.LoadingIn;
 import frc.robot.commands.shooter.AcceleratingShooter;
 import frc.robot.commands.adjuster.AdjustHorizontalAngle;
 import frc.robot.commands.adjuster.AdjustToTarget;
+import frc.robot.commands.adjuster.AdjustVerDown;
+import frc.robot.commands.adjuster.AdjustVerUp;
+import frc.robot.commands.auto.AutoShoot;
+import frc.robot.commands.auto.GoStraight;
 import frc.robot.commands.shooter.StopShooter;
 import frc.robot.subsystems.Adjuster;
 import frc.robot.subsystems.DriveTrain;
@@ -31,6 +47,7 @@ import frc.robot.subsystems.Loading;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -66,6 +83,10 @@ public class RobotContainer {
                         JoystickConst.AssistStick.SHOOTER_TRIGGER_BUTTON);
         private final JoystickButton stop_shooter_btn = new JoystickButton(assist_stick,
                         JoystickConst.AssistStick.STOP_SHOOTER_BUTTON);
+        private final JoystickButton adjuster_ver_up_btn = new JoystickButton(assist_stick,
+                        JoystickConst.AssistStick.ADJUSTER_VER_UP_BUTTON);
+        private final JoystickButton adjuster_ver_down_btn = new JoystickButton(assist_stick,
+                        JoystickConst.AssistStick.ADJUSTER_VER_DOWN_BUTTON);
 
         private final Joystick test_stick = new Joystick(3);
 
@@ -119,9 +140,11 @@ public class RobotContainer {
                                 () -> DriveTrainConst.LOW_SPEED_DRIVETRAIN * main_stick
                                                 .getRawAxis(JoystickConst.MainStick.RIGHT_DRIVETRAIN_AXIS)));
                 shooter_trigger_btn.whenPressed(new AcceleratingShooter(shooter_subsys), true);
-                stop_shooter_btn.whenPressed(new StopShooter(shooter_subsys), true);
-                new JoystickButton(test_stick, 3).whenPressed(new AutoLoadingBalls(loading_subsys));
-                new JoystickButton(test_stick, 5).whenPressed(new AdjustToTarget(adjuster_subsys));
+                stop_shooter_btn.whenPressed(new StopShooterAndLm(adjuster_subsys, shooter_subsys), true);
+                new JoystickButton(assist_stick, 6).whenPressed(new AutoLoadingBalls(loading_subsys));
+                adjuster_ver_up_btn.whenPressed(new AdjustVerUp(adjuster_subsys));
+                adjuster_ver_down_btn.whenPressed(new AdjustVerDown(adjuster_subsys));
+                new JoystickButton(assist_stick, 11).whenPressed(new AdjustToTarget(adjuster_subsys));
         }
 
         private void setDefaultCommand() {
@@ -147,6 +170,14 @@ public class RobotContainer {
          */
         public Command getAutonomousCommand() {
                 // An ExampleCommand will run in autonomous
-                return m_autoCommand;
+                TrajectoryConfig config = new TrajectoryConfig(1, 1);
+                config.setKinematics(drivetrain.getKinematics());
+                Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
+                                List.of(new Pose2d(), new Pose2d(1, -1, new Rotation2d(-90))), config);
+                RamseteCommand command = new RamseteCommand(trajectory, drivetrain::getPose,
+                                new RamseteController(2.0, 0.7), drivetrain.getFeedForward(),
+                                drivetrain.getKinematics(), drivetrain::getSpeeds, drivetrain.getLeftPIDController(),
+                                drivetrain.getRightPIDController(), drivetrain::setOutput, drivetrain);
+                return new AutoShoot(shooter_subsys, adjuster_subsys, loading_subsys);
         }
 }

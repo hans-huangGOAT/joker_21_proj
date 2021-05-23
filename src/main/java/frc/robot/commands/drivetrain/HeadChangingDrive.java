@@ -28,6 +28,7 @@ public class HeadChangingDrive extends CommandBase {
   @Override
   public void initialize() {
     drivetrain.resetGyro();
+    drivetrain.resetEncoder();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

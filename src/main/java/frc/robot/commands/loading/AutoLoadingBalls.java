@@ -32,9 +32,10 @@ public class AutoLoadingBalls extends CommandBase {
     lower = loading_subsys.getLowerDetec();
     mid = loading_subsys.getMidDetec();
     upper = loading_subsys.getUpperDetec();
+    System.out.println(upper + " " + mid + " " + lower);
     if (!upper && !(!lower && mid)) {
       loading_subsys.router_set_same_speed(-0.6 * LoadingConst.ROUTER_IN_SPEED);
-      loading_subsys.loadPreShooting(-0.4 * LoadingConst.PRE_SHOOTING_SPEED);
+      loading_subsys.loadPreShooting(-0.45 * LoadingConst.PRE_SHOOTING_SPEED);
     } else if (!lower && !(!mid && !upper)) {
       loading_subsys.router_set_same_speed(-0.6 * LoadingConst.ROUTER_IN_SPEED);
       loading_subsys.loadPreShooting(0);
@@ -52,6 +53,9 @@ public class AutoLoadingBalls extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (upper) {
+      return true;
+    }
     return false;
   }
 }
