@@ -4,6 +4,7 @@
 
 package frc.robot.commands.auto;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
@@ -21,29 +22,35 @@ public class GoStraight extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    drivetrain.tankDrive(0, 0);
-    drivetrain.resetGyro();
+    // drivetrain.tankDrive(0, 0);
+    // drivetrain.resetGyro();
+    double counter = 1;
+    while (counter < 500) {
+      System.out.println(counter);
+      counter++;
+      drivetrain.tankDrive(0.75, 0.75);
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    angle = drivetrain.getGyroAngle();
-    if (angle < 1.5 && angle > -1.5) {
-      drivetrain.tankDrive(0.4, 0.4);
-    } else if (angle > 0) {
-      if (angle > 15) {
-        drivetrain.tankDrive(-0.4, 0.6);
-      } else {
-        drivetrain.tankDrive(-0.3, 0.5);
-      }
-    } else if (angle < 0) {
-      if (angle < -15) {
-        drivetrain.tankDrive(0.6, -0.4);
-      } else {
-        drivetrain.tankDrive(0.5, -0.3);
-      }
-    }
+    // angle = drivetrain.getGyroAngle();
+    // if (angle < 1.5 && angle > -1.5) {
+    // drivetrain.tankDrive(0.4, 0.4);
+    // } else if (angle > 0) {
+    // if (angle > 15) {
+    // drivetrain.tankDrive(-0.4, 0.6);
+    // } else {
+    // drivetrain.tankDrive(-0.3, 0.5);
+    // }
+    // } else if (angle < 0) {
+    // if (angle < -15) {
+    // drivetrain.tankDrive(0.6, -0.4);
+    // } else {
+    // drivetrain.tankDrive(0.5, -0.3);
+    // }
+    // }
   }
 
   // Called once the command ends or is interrupted.
@@ -54,6 +61,11 @@ public class GoStraight extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    // if (drivetrain.getAverageDistance() > 1.5) {
+    // return true;
+    // } else {
+    // return false;
+    // }
+    return true;
   }
 }

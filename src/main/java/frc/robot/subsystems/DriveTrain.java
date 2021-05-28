@@ -110,6 +110,10 @@ public class DriveTrain extends SubsystemBase {
     return pose;
   }
 
+  public double getAverageDistance() {
+    return (left_encoder.getDistance() + right_encoder.getDistance()) / 2;
+  }
+
   public void setOutput(double leftVolts, double rightVolts) {
     drivetrain.tankDrive(leftVolts / 12, rightVolts / 12);
   }
@@ -130,8 +134,7 @@ public class DriveTrain extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     pose = odometry.update(getHeading(), left_encoder.getDistance(), right_encoder.getDistance());
-    // System.out.println(left_encoder.getDistance() + " " +
-    // right_encoder.getDistance());
+    System.out.println(left_encoder.getDistance() + " " + right_encoder.getDistance());
     // System.out.println(pose.toString());
   }
 }

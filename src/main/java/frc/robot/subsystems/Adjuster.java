@@ -30,7 +30,7 @@ public class Adjuster extends SubsystemBase {
 
   public void set_adjuster_hor(double speed) {
     // if speed < 0, turn right; speed > 0 turn left
-    System.out.println(get_left_bound_limit() + "  " + get_right_bound_limit());
+    // System.out.println(get_left_bound_limit() + " " + get_right_bound_limit());
     if (get_left_bound_limit() && speed > 0) {
       // System.out.println("####");
       adjuster_hor.set(0);
@@ -64,6 +64,10 @@ public class Adjuster extends SubsystemBase {
     return NetworkTableInstance.getDefault().getTable("limelight-joker").getEntry("tx").getDouble(0);
   }
 
+  public double get_lm_off_center_Yvalue() {
+    return NetworkTableInstance.getDefault().getTable("limelight-joker").getEntry("ty").getDouble(0);
+  }
+
   public void light_off() {
     NetworkTableInstance.getDefault().getTable("limelight-joker").getEntry("ledMode").setNumber(1);
   }
@@ -76,5 +80,6 @@ public class Adjuster extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    // System.out.println(get_lm_off_center_Yvalue());
   }
 }

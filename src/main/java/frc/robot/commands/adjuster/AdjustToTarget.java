@@ -28,13 +28,10 @@ public class AdjustToTarget extends CommandBase {
   @Override
   public void execute() {
     if (adjuster_subsys.get_lm_off_center_Xvalue() > 3) {
-      System.out.println("a");
       adjuster_subsys.set_adjuster_hor(-AdjusterConst.ADJUST_TO_TARGET_SPEED);
     } else if (adjuster_subsys.get_lm_off_center_Xvalue() < -3) {
-      System.out.println("b");
       adjuster_subsys.set_adjuster_hor(AdjusterConst.ADJUST_TO_TARGET_SPEED);
     } else {
-      System.out.println("c");
       adjuster_subsys.set_adjuster_hor(0);
     }
   }

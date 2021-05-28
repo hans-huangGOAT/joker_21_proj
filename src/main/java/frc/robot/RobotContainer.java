@@ -4,9 +4,13 @@
 
 package frc.robot;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.controller.RamseteController;
@@ -16,6 +20,7 @@ import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj.util.Units;
 import frc.robot.Constants.DriveTrainConst;
 import frc.robot.Constants.IntakeConst;
@@ -36,7 +41,9 @@ import frc.robot.commands.adjuster.AdjustHorizontalAngle;
 import frc.robot.commands.adjuster.AdjustToTarget;
 import frc.robot.commands.adjuster.AdjustVerDown;
 import frc.robot.commands.adjuster.AdjustVerUp;
+import frc.robot.commands.auto.AutoDelievering;
 import frc.robot.commands.auto.AutoShoot;
+import frc.robot.commands.auto.CenterAutoCommand;
 import frc.robot.commands.auto.GoStraight;
 import frc.robot.commands.shooter.StopShooter;
 import frc.robot.subsystems.Adjuster;
@@ -101,10 +108,20 @@ public class RobotContainer {
         // The robot's commands are defined here...
         private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
+        private String trajectoryJSON = "paths/auto1.wpilib.json";
+        public Trajectory trajectory_center = new Trajectory();
+
         /**
          * The container for the robot. Contains subsystems, OI devices, and commands.
          */
         public RobotContainer() {
+                try {
+                        Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+                        trajectory_center = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+                } catch (IOException ex) {
+                        DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+                }
+
                 // Configure the button bindings
                 configureButtonBindings();
 
@@ -178,6 +195,8 @@ public class RobotContainer {
                                 new RamseteController(2.0, 0.7), drivetrain.getFeedForward(),
                                 drivetrain.getKinematics(), drivetrain::getSpeeds, drivetrain.getLeftPIDController(),
                                 drivetrain.getRightPIDController(), drivetrain::setOutput, drivetrain);
-                return new AutoShoot(shooter_subsys, adjuster_subsys, loading_subsys);
+                // return new CenterAutoCommand(drivetrain, shooter_subsys, adjuster_subsys,
+                // loading_subsys)
+                return new AutoShoot(shooter_subsys, adjuster_subsys, loading_subsys, drivetrain);
         }
 }

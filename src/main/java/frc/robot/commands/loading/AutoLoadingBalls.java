@@ -32,7 +32,7 @@ public class AutoLoadingBalls extends CommandBase {
     lower = loading_subsys.getLowerDetec();
     mid = loading_subsys.getMidDetec();
     upper = loading_subsys.getUpperDetec();
-    System.out.println(upper + " " + mid + " " + lower);
+    // System.out.println(upper + " " + mid + " " + lower);
     if (!upper && !(!lower && mid)) {
       loading_subsys.router_set_same_speed(-0.6 * LoadingConst.ROUTER_IN_SPEED);
       loading_subsys.loadPreShooting(-0.45 * LoadingConst.PRE_SHOOTING_SPEED);
