@@ -22,19 +22,15 @@ public class GoStraight extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // drivetrain.tankDrive(0, 0);
+    drivetrain.tankDrive(0, 0);
     // drivetrain.resetGyro();
-    double counter = 1;
-    while (counter < 500) {
-      System.out.println(counter);
-      counter++;
-      drivetrain.tankDrive(0.75, 0.75);
-    }
+    withTimeout(1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // drivetrain.tankDrive(0.75, 0.75);
     // angle = drivetrain.getGyroAngle();
     // if (angle < 1.5 && angle > -1.5) {
     // drivetrain.tankDrive(0.4, 0.4);
@@ -51,11 +47,13 @@ public class GoStraight extends CommandBase {
     // drivetrain.tankDrive(0.5, -0.3);
     // }
     // }
+    drivetrain.tankDrive(0.75, 0.75);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    drivetrain.tankDrive(0, 0);
   }
 
   // Returns true when the command should end.
@@ -66,6 +64,6 @@ public class GoStraight extends CommandBase {
     // } else {
     // return false;
     // }
-    return true;
+    return false;
   }
 }

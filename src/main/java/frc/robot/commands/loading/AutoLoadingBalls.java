@@ -34,10 +34,10 @@ public class AutoLoadingBalls extends CommandBase {
     upper = loading_subsys.getUpperDetec();
     // System.out.println(upper + " " + mid + " " + lower);
     if (!upper && !(!lower && mid)) {
-      loading_subsys.router_set_same_speed(-0.6 * LoadingConst.ROUTER_IN_SPEED);
-      loading_subsys.loadPreShooting(-0.45 * LoadingConst.PRE_SHOOTING_SPEED);
+      loading_subsys.router_set_same_speed(-0.54 * LoadingConst.ROUTER_IN_SPEED);
+      loading_subsys.loadPreShooting(-0.54 * LoadingConst.PRE_SHOOTING_SPEED);
     } else if (!lower && !(!mid && !upper)) {
-      loading_subsys.router_set_same_speed(-0.6 * LoadingConst.ROUTER_IN_SPEED);
+      loading_subsys.router_set_same_speed(-0.54 * LoadingConst.ROUTER_IN_SPEED);
       loading_subsys.loadPreShooting(0);
     } else {
       loading_subsys.router_set_same_speed(0);

@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.AddressableLED;
+import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -27,6 +30,9 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+  private AddressableLED led_left;
+  private AddressableLED led_right;
+  private AddressableLEDBuffer led_buffer;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -37,8 +43,18 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
+    led_left = new AddressableLED(0);
+    // led_right = new AddressableLED(1);
+    led_buffer = new AddressableLEDBuffer(60);
+    led_left.setLength(led_buffer.getLength());
+    // led_right.setLength(led_buffer.getLength());
+    led_left.setData(led_buffer);
+    // led_right.setData(led_buffer);
+    led_left.start();
+    // led_right.start();
 
     m_robotContainer = new RobotContainer();
+    CameraServer.getInstance().startAutomaticCapture();
   }
 
   /**
@@ -59,6 +75,13 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods. This must be called from the
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
+    for (var i = 0; i < led_buffer.getLength(); i++) {
+      // Sets the specified LED to the RGB values for red
+      led_buffer.setRGB(i, 255, 0, 0);
+    }
+
+    led_left.setData(led_buffer);
+    // led_right.setData(led_buffer);
     CommandScheduler.getInstance().run();
   }
 
@@ -116,4 +139,5 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
+
 }

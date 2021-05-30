@@ -34,16 +34,16 @@ public class HeadChangingDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    angle = drivetrain.getGyroAngle();
-    if ((angle > 90 && angle < 270) || (angle > -270 && angle < -90)) {
-      drivetrain.tankDrive(right_speed.getAsDouble(), left_speed.getAsDouble());
-    }
-    if ((angle < 90 && angle > -90) || (angle > 270) || (angle < -270)) {
-      drivetrain.tankDrive(-left_speed.getAsDouble(), -right_speed.getAsDouble());
-    }
-    if ((angle >= 358 && angle <= 362) || (angle <= -358 && angle >= -362)) {
-      drivetrain.resetGyro();
-    }
+    // angle = drivetrain.getGyroAngle();
+    // if ((angle > 90 && angle < 270) || (angle > -270 && angle < -90)) {
+    // drivetrain.tankDrive(right_speed.getAsDouble(), left_speed.getAsDouble());
+    // }
+    // if ((angle < 90 && angle > -90) || (angle > 270) || (angle < -270)) {
+    drivetrain.tankDrive(-left_speed.getAsDouble(), -right_speed.getAsDouble());
+    // }
+    // if ((angle >= 358 && angle <= 362) || (angle <= -358 && angle >= -362)) {
+    // drivetrain.resetGyro();
+    // }
   }
 
   // Called once the command ends or is interrupted.

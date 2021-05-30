@@ -33,6 +33,7 @@ public class Loading extends SubsystemBase {
     lower_detector = new DigitalInput(LoadingConst.LOWER_DETECTOR_PORT);
     mid_detector = new DigitalInput(LoadingConst.MID_DETECTOR_PORT);
     upper_detector = new DigitalInput(LoadingConst.UPPER_DETECTOR_PORT);
+    router_right.setInverted(true);
     router.setInverted(true);
   }
 

@@ -36,15 +36,21 @@ import frc.robot.commands.intake.SuckerStop;
 import frc.robot.commands.intake.TakeBackIntake;
 import frc.robot.commands.loading.AutoLoadingBalls;
 import frc.robot.commands.loading.LoadingIn;
+import frc.robot.commands.loading.PreShootingCtrl;
+import frc.robot.commands.loading.StopLoading;
 import frc.robot.commands.shooter.AcceleratingShooter;
 import frc.robot.commands.adjuster.AdjustHorizontalAngle;
 import frc.robot.commands.adjuster.AdjustToTarget;
 import frc.robot.commands.adjuster.AdjustVerDown;
 import frc.robot.commands.adjuster.AdjustVerUp;
+import frc.robot.commands.adjuster.LimelightOff;
 import frc.robot.commands.auto.AutoDelievering;
 import frc.robot.commands.auto.AutoShoot;
 import frc.robot.commands.auto.CenterAutoCommand;
 import frc.robot.commands.auto.GoStraight;
+import frc.robot.commands.auto.SimpleInitialLine;
+import frc.robot.commands.auto.ThrBallShootAuto;
+import frc.robot.commands.auto.ThrBallShootMinor;
 import frc.robot.commands.shooter.StopShooter;
 import frc.robot.subsystems.Adjuster;
 import frc.robot.subsystems.DriveTrain;
@@ -56,6 +62,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -76,16 +83,11 @@ public class RobotContainer {
 
         // =======================================================================
         private final Joystick assist_stick = new Joystick(JoystickConst.ASSIST_STICK_PORT);
-        private final JoystickButton sucker_in_btn = new JoystickButton(assist_stick,
-                        JoystickConst.AssistStick.SUCKER_IN_BUTTON);
-        private final JoystickButton sucker_out_btn = new JoystickButton(assist_stick,
-                        JoystickConst.AssistStick.SUCKER_OUT_BUTTON);
-        private final JoystickButton sucker_off_btn = new JoystickButton(assist_stick,
-                        JoystickConst.AssistStick.SUCKER_OFF_BUTTON);
-        private final JoystickButton push_out_intake_btn = new JoystickButton(assist_stick,
-                        JoystickConst.AssistStick.PUSH_OUT_INTAKE_BUTTON);
-        private final JoystickButton take_back_intake_btn = new JoystickButton(assist_stick,
-                        JoystickConst.AssistStick.TAKE_BACK_INTAKE_BUTTON);
+        private final JoystickButton sucker_in_btn = new JoystickButton(main_stick, 5);
+        private final JoystickButton sucker_out_btn = new JoystickButton(main_stick, 4);
+        private final JoystickButton sucker_off_btn = new JoystickButton(main_stick, 7);
+        private final JoystickButton push_out_intake_btn = new JoystickButton(main_stick, 8);
+        private final JoystickButton take_back_intake_btn = new JoystickButton(main_stick, 6);
         private final JoystickButton shooter_trigger_btn = new JoystickButton(assist_stick,
                         JoystickConst.AssistStick.SHOOTER_TRIGGER_BUTTON);
         private final JoystickButton stop_shooter_btn = new JoystickButton(assist_stick,
@@ -138,7 +140,7 @@ public class RobotContainer {
         private void configureButtonBindings() {
                 sucker_in_btn.whenPressed(new SuckerIn(intake_subsys, () -> IntakeConst.SUCKER_IN_SPEED), true);
                 sucker_out_btn.whileHeld(new SuckerOut(intake_subsys, () -> IntakeConst.SUCKER_OUT_SPEED), true);
-                sucker_off_btn.whenPressed(new SuckerStop(intake_subsys));
+                sucker_off_btn.whenPressed(new SuckerStop(intake_subsys), true);
                 push_out_intake_btn.whenPressed(new PushOutIntake(intake_subsys));
                 take_back_intake_btn.whenPressed(new TakeBackIntake(intake_subsys));
                 high_speed_drivetrain_btn.whenPressed(new HeadChangingDrive(drivetrain,
@@ -158,10 +160,26 @@ public class RobotContainer {
                                                 .getRawAxis(JoystickConst.MainStick.RIGHT_DRIVETRAIN_AXIS)));
                 shooter_trigger_btn.whenPressed(new AcceleratingShooter(shooter_subsys), true);
                 stop_shooter_btn.whenPressed(new StopShooterAndLm(adjuster_subsys, shooter_subsys), true);
-                new JoystickButton(assist_stick, 6).whenPressed(new AutoLoadingBalls(loading_subsys));
-                adjuster_ver_up_btn.whenPressed(new AdjustVerUp(adjuster_subsys));
-                adjuster_ver_down_btn.whenPressed(new AdjustVerDown(adjuster_subsys));
-                new JoystickButton(assist_stick, 11).whenPressed(new AdjustToTarget(adjuster_subsys));
+                new JoystickButton(assist_stick, 6).whenPressed(new AutoLoadingBalls(loading_subsys), true);
+                adjuster_ver_up_btn.whenPressed(new AdjustVerUp(adjuster_subsys), true);
+                adjuster_ver_down_btn.whenPressed(new AdjustVerDown(adjuster_subsys), true);
+                new JoystickButton(assist_stick, 11).whenPressed(new AdjustToTarget(adjuster_subsys), true);
+                // new JoystickButton(assist_stick, 12).toggleWhenPressed(
+                // new AdjustHorizontalAngle(adjuster_subsys, () -> assist_stick.getRawAxis(2)),
+                // true);
+                new JoystickButton(assist_stick, 12).whenPressed(new LimelightOff(adjuster_subsys), true);
+                new POVButton(assist_stick, 0).whenPressed(new StopLoading(loading_subsys), true);
+                new POVButton(assist_stick, 0).whenReleased(
+                                new LoadingIn(loading_subsys,
+                                                () -> LoadingConst.PRE_SHOOTING_SPEED * assist_stick
+                                                                .getRawAxis(JoystickConst.AssistStick.LOADING_AXIS),
+                                                () -> LoadingConst.ROUTER_IN_SPEED * assist_stick
+                                                                .getRawAxis(JoystickConst.AssistStick.LOADING_AXIS)),
+                                true);
+                new POVButton(assist_stick, 90).whileHeld(new AdjustHorizontalAngle(adjuster_subsys, () -> 0.3));
+                new POVButton(assist_stick, 270).whileHeld(new AdjustHorizontalAngle(adjuster_subsys, () -> -0.3));
+                new POVButton(assist_stick, 180).whileHeld(new PreShootingCtrl(loading_subsys, () -> 0.5));
+
         }
 
         private void setDefaultCommand() {
@@ -175,9 +193,9 @@ public class RobotContainer {
                                                 * assist_stick.getRawAxis(JoystickConst.AssistStick.LOADING_AXIS),
                                 () -> LoadingConst.ROUTER_IN_SPEED
                                                 * assist_stick.getRawAxis(JoystickConst.AssistStick.LOADING_AXIS)));
-                CommandScheduler.getInstance().setDefaultCommand(adjuster_subsys,
-                                new AdjustHorizontalAngle(adjuster_subsys, () -> test_stick.getRawAxis(1)));
-                CommandScheduler.getInstance().setDefaultCommand(intake_subsys, new TakeBackIntake(intake_subsys));
+                CommandScheduler.getInstance().setDefaultCommand(adjuster_subsys, new LimelightOff(adjuster_subsys));
+                // CommandScheduler.getInstance().setDefaultCommand(intake_subsys, new
+                // TakeBackIntake(intake_subsys));
         }
 
         /**
@@ -197,6 +215,11 @@ public class RobotContainer {
                                 drivetrain.getRightPIDController(), drivetrain::setOutput, drivetrain);
                 // return new CenterAutoCommand(drivetrain, shooter_subsys, adjuster_subsys,
                 // loading_subsys)
-                return new AutoShoot(shooter_subsys, adjuster_subsys, loading_subsys, drivetrain);
+                // return new AutoShoot(shooter_subsys, adjuster_subsys, loading_subsys,
+                // drivetrain);
+                return new SimpleInitialLine(drivetrain);
+                // return new ThrBallShootMinor(drivetrain, loading_subsys);
+                // return new ThrBallShootAuto(drivetrain, loading_subsys, shooter_subsys,
+                // adjuster_subsys);
         }
 }

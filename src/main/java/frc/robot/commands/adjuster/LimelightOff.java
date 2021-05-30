@@ -21,6 +21,7 @@ public class LimelightOff extends CommandBase {
   @Override
   public void initialize() {
     adjuster_subsys.light_off();
+    adjuster_subsys.set_adjuster_hor(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
