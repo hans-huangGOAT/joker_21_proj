@@ -45,6 +45,8 @@ import frc.robot.commands.adjuster.AdjustVerDown;
 import frc.robot.commands.adjuster.AdjustVerUp;
 import frc.robot.commands.adjuster.LimelightOff;
 import frc.robot.commands.auto.AutoDelievering;
+import frc.robot.commands.auto.AutoLoadingIn;
+import frc.robot.commands.auto.AutoPreShootingCtrl;
 import frc.robot.commands.auto.AutoShoot;
 import frc.robot.commands.auto.CenterAutoCommand;
 import frc.robot.commands.auto.GoStraight;
@@ -217,9 +219,11 @@ public class RobotContainer {
                 // loading_subsys)
                 // return new AutoShoot(shooter_subsys, adjuster_subsys, loading_subsys,
                 // drivetrain);
-                return new SimpleInitialLine(drivetrain);
+                // return new SimpleInitialLine(drivetrain);
                 // return new ThrBallShootMinor(drivetrain, loading_subsys);
-                // return new ThrBallShootAuto(drivetrain, loading_subsys, shooter_subsys,
-                // adjuster_subsys);
+                return new ThrBallShootAuto(drivetrain, loading_subsys, shooter_subsys, adjuster_subsys);
+                // return new GoStraight(drivetrain);
+                // return new AutoPreShootingCtrl(loading_subsys, () -> 0.5);
+                // return new AutoLoadingIn(loading_subsys, () -> -0.5, () -> -0.5);
         }
 }

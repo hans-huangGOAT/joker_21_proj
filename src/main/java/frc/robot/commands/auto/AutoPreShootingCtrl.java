@@ -27,9 +27,8 @@ public class AutoPreShootingCtrl extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    loading_subsys.router_set_same_speed(0);
+    // loading_subsys.router_set_same_speed(0);
     loading_subsys.loadPreShooting(0);
-    withTimeout(1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

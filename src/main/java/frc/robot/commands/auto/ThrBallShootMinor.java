@@ -19,7 +19,8 @@ public class ThrBallShootMinor extends SequentialCommandGroup {
   public ThrBallShootMinor(DriveTrain drivetrain, Loading loading_subsys) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new GoStraight(drivetrain), new AutoPreShootingCtrl(loading_subsys, () -> 0.5),
-        new AutoLoadingIn(loading_subsys, () -> -0.5, () -> -0.5));
+    addCommands(new GoStraight(drivetrain).withTimeout(0.9), new WaitCommand(1),
+        new AutoPreShootingCtrl(loading_subsys, () -> 0.5).withTimeout(1.5),
+        new AutoLoadingIn(loading_subsys, () -> -0.5, () -> -0.5).withTimeout(3));
   }
 }

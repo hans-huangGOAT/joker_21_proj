@@ -24,7 +24,6 @@ public class GoStraight extends CommandBase {
   public void initialize() {
     drivetrain.tankDrive(0, 0);
     // drivetrain.resetGyro();
-    withTimeout(1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

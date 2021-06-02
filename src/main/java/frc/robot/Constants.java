@@ -87,7 +87,7 @@ public final class Constants {
     public static final class ShooterConst {
         public static final int SHOOTER_MOTOR_PORT1 = 11;
         public static final int SHOOTER_MOTOR_PORT2 = 12;
-        public static final double SHOOTER_MAX_SPEED = 0.7;
+        public static final double SHOOTER_MAX_SPEED = 0.5;
         public static final double SHOOTER_STEP_ACCELERATION = 0.0001;
         public static final double SHOOTER_MAX_ACCELERATION = 0.05;
     }

@@ -28,7 +28,6 @@ public class AutoLoadingIn extends CommandBase {
   public void initialize() {
     loading_subsys.loadPreShooting(0);
     loading_subsys.router_set_same_speed(0);
-    withTimeout(4);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
