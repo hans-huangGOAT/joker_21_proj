@@ -4,8 +4,6 @@ This is Team 5849's 2021 robot code for RCC, which is FRC held by Chinese commit
 
 ## Code structure
 
----
-
 The code used the Command Based Programming Framework to structure this project. So the codebase can be divided into three main parts:
 
 - commands
