@@ -1,18 +1,26 @@
-this is the programming project of frc 5849 joker.
+# FRC(RCC) Team 5849 2021
 
-| ID | Hardware | 作用 |
-| ------ |------| ------|
-| 00 | Victor SPX | 左底盘 |
-| 01 | Victor SPX | 左底盘 |
-| 02 | Victor SPX | 左底盘 |
-| 03 | Victor SPX | 右底盘 |
-| 04 | Victor SPX | 右底盘 |
-| 05 | Victor SPX | 右底盘 |
-| 09 | Victor SPX | Intake |
-| 07 | Victor SPX | 中部皮带轮吸入炮台 |
-| 13 | Victor SPX | 中部皮带轮吸入炮台 |
-| 06 | Victor SPX | 竖直摩擦轮 |
-| 08 | Victor SPX | 竖直摩擦轮 |
-| 11 | Talon FX | 射球 |
-| 12 | Victor SPX | 射球 |
-| 10 | Victor SPX | 炮台转动部分 |
+This is Team 5849's 2021 robot code for RCC, which is FRC held by Chinese committee in Hangzhou. The code is written in Java and is based off of WPILib's Java control system.
+
+## Code structure
+
+---
+
+The code used the Command Based Programming Framework to structure this project. So the codebase can be divided into three main parts:
+
+- commands
+- subsystems
+- binding commands and subsystems to joystick buttons(for tele-operation)
+
+## Setup Instructions
+
+- Follow the instructions on WPILib to setup the environment (https://docs.wpilib.org/en/stable/index.html)
+- Clone this repo
+- Run `./gradlew` to download gradle and required FRC libraries
+- Run `./gradlew tasks` to see available build options
+
+## Robot Wiring Instructions
+
+---
+
+To lookup the port mapping of motors and sensors on the robot, checkout the Constants.java file in the directory.
