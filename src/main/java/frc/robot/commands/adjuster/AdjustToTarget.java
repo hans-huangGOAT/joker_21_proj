@@ -27,6 +27,8 @@ public class AdjustToTarget extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // adjust the shooter angle corresponds to the
+    // value got from lime light camera
     if (adjuster_subsys.get_lm_off_center_Xvalue() > 3) {
       adjuster_subsys.set_adjuster_hor(-AdjusterConst.ADJUST_TO_TARGET_SPEED);
     } else if (adjuster_subsys.get_lm_off_center_Xvalue() < -3) {
