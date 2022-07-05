@@ -21,6 +21,4 @@ The code used the Command Based Programming Framework to structure this project.
 
 ## Robot Wiring Instructions
 
----
-
 To lookup the port mapping of motors and sensors on the robot, checkout the Constants.java file in the directory.
