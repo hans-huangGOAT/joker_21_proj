@@ -12,7 +12,7 @@ The code used the Command Based Programming Framework to structure this project.
 
 ## Setup Instructions
 
-- Follow the instructions on WPILib to setup the environment (https://docs.wpilib.org/en/stable/index.html)
+- Follow the [instructions on WPILib](https://docs.wpilib.org/en/stable/index.html) to setup the environment
 - Clone this repo
 - Run `./gradlew` to download gradle and required FRC libraries
 - Run `./gradlew tasks` to see available build options
